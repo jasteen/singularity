@@ -24,7 +24,7 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  HTSLIB=/opt/htslib
  SAMTOOLS=/opt/samtools
  BCTFOOLS=/opt/bcftools
- BWA=/opt/bwa
+ BWA=/opt/bwa-0.7.17
  export PATH=$HTSLIB/bin/:$SAMTOOLS/bin/:$BCFTOOLS/bin/:$BWA/bin$PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
 
@@ -59,10 +59,10 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  make install
 
 echo ### Installing bwa ###
-cd /
-git clone https://github.com/lh3/bwa.git
-cd bwa
-./configure --prefix=/opt/bwa
+cd /opt
+wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.17.tar.bz2
+tar -xvjf bwa-0.7.17.tar.bz2
+cd bwa-0.7.17
 make
 
 
