@@ -62,11 +62,8 @@ echo ### Installing bwa ###
 cd /
 git clone https://github.com/lh3/bwa.git
 cd bwa
-autoheader
-autoconf
 ./configure --prefix=/opt/bwa
 make
-make install
 
 
 %runscript 
