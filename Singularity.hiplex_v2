@@ -77,14 +77,14 @@ make
 ### Vardict ###
 cd /opt
 git clone https://github.com/PolinaBevad/VarDictJava/
-git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
 cd VarDict
+git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
 ./gradlew clean installDist
 
 ### VT ###
 cd /opt
 git clone https://github.com/atks/vt.git  
-vt 
+cd vt 
 make 
 
 ### VEP ###
