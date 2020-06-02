@@ -21,7 +21,7 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:${GRADLE_HOME}/bin:$VARDICT/bin/:$VT/bin:$CPANM:PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
  export PATH=${GRADLE_HOME}/bin:${PATH}
- JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+ export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
 %post -c /bin/bash
  apt update
@@ -81,7 +81,7 @@ cd /opt
 git clone https://github.com/PolinaBevad/VarDictJava/
 cd VarDictJava
 git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
-JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 ./gradlew clean installDist
 
 echo ### VT ###
