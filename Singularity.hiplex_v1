@@ -12,8 +12,8 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  HTSLIB=/opt/htslib
  SAMTOOLS=/opt/samtools
  BCFTOOLS=/opt/bcftools
- BWA=/opt/bwa
- export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA/bin:$PATH
+ BWA=/opt/bwa-0.7.17
+ export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:$PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
 
 %post -c /bin/bash
@@ -25,7 +25,7 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  SAMTOOLS=/opt/samtools
  BCTFOOLS=/opt/bcftools
  BWA=/opt/bwa-0.7.17
- export PATH=$HTSLIB/bin/:$SAMTOOLS/bin/:$BCFTOOLS/bin/:$BWA/bin$PATH
+ export PATH=$HTSLIB/bin/:$SAMTOOLS/bin/:$BCFTOOLS/bin/:$BWA:$PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
 
  echo ### Installing htslib ###
