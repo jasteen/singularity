@@ -91,7 +91,7 @@ make
 cd /opt
 git clone https://github.com/Ensembl/ensembl-vep.git
 cd ensembl-vep
-perl INSTALL.pl --AUTO acp --ASSEMBLY GRCh37 --CACHE-DIR ./cache --PLUGINS all --NO-UPDATE --SPECIES homo_sapiens_refseq,homo_sapiens 
+perl INSTALL.pl --AUTO acp --ASSEMBLY GRCh37 --CACHEDIR ./cache --PLUGINS all --NO_UPDATE --SPECIES homo_sapiens_refseq,homo_sapiens 
 
 %runscript 
  $*
