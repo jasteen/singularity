@@ -1,0 +1,97 @@
+Bootstrap: shub
+From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda10.1
+
+%labels
+ MAINTAINER_NAME  Jason Steen
+ MAINTAINER_EMAIL jason.steen@monash.edu
+
+ APPLICATION_NAME HIPLEX
+ APPLICATION_VERSION 2
+
+%environment
+ HTSLIB=/opt/htslib
+ SAMTOOLS=/opt/samtools
+ BCFTOOLS=/opt/bcftools
+ BWA=/opt/bwa-0.7.17
+ VARDICT=/opt/VarDictJava/build/install/VarDict/
+ VT=/opt/vt
+ VEP=/opt/vep
+ export GRADLE_HOME=/opt/gradle/gradle-6.4.1
+ export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:${GRADLE_HOME}/bin:$VARDICT/bin/:$VT/bin:PATH
+ export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
+ 
+ export PATH=${GRADLE_HOME}/bin:${PATH}
+%post -c /bin/bash
+ apt update
+ apt -y install bedtools r-base-core openjdk-8-jdk autoconf libbz2-dev liblzma-dev libcurl4-openssl-dev libncurses-dev zlib1g-dev
+ 
+ echo "Setting env variables"
+ HTSLIB=/opt/htslib
+ SAMTOOLS=/opt/samtools
+ BCTFOOLS=/opt/bcftools
+ BWA=/opt/bwa-0.7.17
+ export PATH=$HTSLIB/bin/:$SAMTOOLS/bin/:$BCFTOOLS/bin/:$BWA:$PATH
+ export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
+
+ echo ### Installing htslib ###
+ cd /
+ git clone https://github.com/samtools/htslib.git
+ cd htslib
+ autoheader
+ autoconf
+ ./configure --prefix=/opt/htslib
+ make
+ make install  
+
+ echo ### Installing samtools ###
+ cd /
+ git clone https://github.com/samtools/samtools.git
+ cd samtools
+ autoheader
+ autoconf
+ ./configure --prefix=/opt/samtools
+ make
+ make install 
+
+ echo ### Installing bcftools ###
+ cd /
+ git clone https://github.com/samtools/bcftools.git
+ cd bcftools
+ autoheader
+ autoconf
+ ./configure --prefix=/opt/bcftools
+ make
+ make install
+
+echo ### Installing bwa ###
+cd /opt
+wget https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.17.tar.bz2
+tar -xvjf bwa-0.7.17.tar.bz2
+cd bwa-0.7.17
+make
+
+#### gradle ### (may or may not be needed to build Vardict when i'm not using a master distibution)
+#wget https://services.gradle.org/distributions/gradle-6.4.1-bin.zip -P /tmp
+#unzip -d /opt/gradle /tmp/gradle-*.zip
+
+### Vardict ###
+cd /opt
+git clone https://github.com/PolinaBevad/VarDictJava/
+git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
+cd VarDict
+./gradlew clean installDist
+
+### VT ###
+cd /opt
+git clone https://github.com/atks/vt.git  
+vt 
+make 
+
+### VEP ###
+cd /opt
+git clone https://github.com/Ensembl/ensembl-vep.git
+cd ensembl-vep
+perl INSTALL.pl --AUTO acp --ASSEMBLY GRCh37 --CACHE-DIR ./cache --PLUGINS all --NO-UPDATE --SPECIES homo_sapiens_refseq,homo_sapiens 
+
+%runscript 
+ $*
