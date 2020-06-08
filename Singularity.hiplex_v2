@@ -18,7 +18,7 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  VEP=/opt/vep
  CPANM=/opt/cpanm
  export GRADLE_HOME=/opt/gradle/gradle-6.4.1
- export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:${GRADLE_HOME}/bin:$VARDICT/bin/:$VT/bin:$CPANM:PATH
+ export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:${GRADLE_HOME}/bin:$VARDICT/bin/:$VT/bin:$CPANM:$PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
  export PATH=${GRADLE_HOME}/bin:${PATH}
  export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
@@ -30,10 +30,17 @@ From: Characterisation-Virtual-Laboratory/CharacterisationVL-Software:1804-cuda1
  echo "Setting env variables"
  HTSLIB=/opt/htslib
  SAMTOOLS=/opt/samtools
- BCTFOOLS=/opt/bcftools
+ BCFTOOLS=/opt/bcftools
  BWA=/opt/bwa-0.7.17
- export PATH=/bin:$HTSLIB/bin/:$SAMTOOLS/bin/:$BCFTOOLS/bin/:$BWA:$PATH
+ VARDICT=/opt/VarDictJava/build/install/VarDict/
+ VT=/opt/vt
+ VEP=/opt/vep
+ CPANM=/opt/cpanm
+ export GRADLE_HOME=/opt/gradle/gradle-6.4.1
+ export PATH=$HTSLIB/bin:$SAMTOOLS/bin:$BCFTOOLS/bin:$BWA:${GRADLE_HOME}/bin:$VARDICT/bin/:$VT/bin:$CPANM:$PATH
  export LD_LIBRARY_PATH=$HTSLIB/lib/:$LD_LIBRARY_PATH
+ export PATH=${GRADLE_HOME}/bin:${PATH}
+ export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
 
  echo ### Installing htslib ###
@@ -98,9 +105,10 @@ mkdir cpanm
 cd cpanm
 curl -L https://cpanmin.us/ -o cpanm
 chmod +x cpanm
-cpanm DBI
-cpanm DBD::mysql
-cpanm Archive::Zip
+./cpanm DBI
+./cpanm DBD::mysql
+./cpanm Archive::Zip
+./cpanm Build
 cd /opt
 git clone https://github.com/Ensembl/ensembl-vep.git
 cd ensembl-vep
