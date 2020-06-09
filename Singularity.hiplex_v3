@@ -95,5 +95,20 @@ git clone https://github.com/Ensembl/ensembl-vep.git
 cd ensembl-vep
 perl INSTALL.pl --AUTO ap --ASSEMBLY GRCh37 --PLUGINS all --NO_UPDATE --SPECIES homo_sapiens_refseq,homo_sapiens 
 
+echo ### Vardict ###
+cd /opt
+git clone https://github.com/PolinaBevad/VarDictJava/
+cd VarDictJava
+git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+export PATH=/bin:$PATH
+./gradlew clean installDist
+
+echo ### VT ###
+cd /opt
+git clone https://github.com/atks/vt.git  
+cd vt 
+make 
+
 %runscript 
  $*
