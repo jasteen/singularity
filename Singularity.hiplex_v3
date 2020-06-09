@@ -80,25 +80,6 @@ tar -xvjf bwa-0.7.17.tar.bz2
 cd bwa-0.7.17
 make
 
-echo #### gradle ### (may or may not be needed to build Vardict when i'm not using a master distibution)
-wget https://services.gradle.org/distributions/gradle-6.4.1-bin.zip -P /tmp
-unzip -d /opt/gradle /tmp/gradle-*.zip
-
-echo ### Vardict ###
-cd /opt
-git clone https://github.com/PolinaBevad/VarDictJava/
-cd VarDictJava
-git checkout 2e7d912a3c7ec2b035d4a71a97c84d2f4ac53a86
-export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
-export PATH=/bin:$PATH
-./gradlew clean installDist
-
-echo ### VT ###
-cd /opt
-git clone https://github.com/atks/vt.git  
-cd vt 
-make 
-
 echo ### VEP ###
 cd /opt
 mkdir cpanm
